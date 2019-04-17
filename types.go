@@ -3,9 +3,9 @@ package knightmoves
 type (
 	// Game is a container to run the search
 	Game struct {
-		Initial  Position
-		Target   Position
-		MaxDepth int
+		Initial  *Position
+		Target   *Position
+		MaxDepth uint
 		Verbose  bool
 
 		solutions [][]Position
