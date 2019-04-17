@@ -3,7 +3,7 @@ package knightmoves
 import "testing"
 
 func TestGameValid(t *testing.T) {
-	g, err := NewGame("A1", "H8", 100, true)
+	g, err := NewGame("A1", "H8", 20, true)
 
 	if err != nil {
 		t.Logf("expected no error, got [%s]", err)
@@ -22,7 +22,7 @@ func TestGameValid(t *testing.T) {
 }
 
 func TestGameInvalidInitialPosition(t *testing.T) {
-	_, err := NewGame("Z1", "H8", 100, true)
+	_, err := NewGame("Z1", "H8", 20, true)
 
 	if err != ErrInvalidFormat {
 		t.Logf("expected ErrInvalidFormat, got [%s]", err)
@@ -31,7 +31,7 @@ func TestGameInvalidInitialPosition(t *testing.T) {
 }
 
 func TestGameInvalidTargetPosition(t *testing.T) {
-	_, err := NewGame("A1", "Z8", 100, true)
+	_, err := NewGame("A1", "Z8", 20, true)
 
 	if err != ErrInvalidFormat {
 		t.Logf("expected ErrInvalidFormat, got [%s]", err)
