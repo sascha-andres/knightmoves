@@ -36,3 +36,9 @@ Example:
         2: C2
         3: A3
         4: B1
+
+## History
+
+|Version|Description|
+|---|---|
+|0.1.0|Initial version|
