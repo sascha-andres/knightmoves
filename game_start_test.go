@@ -40,3 +40,23 @@ func TestGameTargetEqualsInitial(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestGameA1H3(t *testing.T) {
+	g, err := NewGame("A1", "H3", 10, false)
+
+	if err != nil {
+		t.Logf("expected no error, got [%s]", err)
+		t.FailNow()
+	}
+
+	err = g.Start()
+	if err != nil {
+		t.Logf("expected no error, got [%s]", err)
+		t.FailNow()
+	}
+
+	if len(g.Solution) == 0 {
+		t.Log("there should be a solution")
+		t.FailNow()
+	}
+}

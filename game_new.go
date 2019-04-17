@@ -9,6 +9,7 @@ func NewGame(initial, target string, maxDepth uint, verbose bool) (*Game, error)
 		baseLogger: logrus.WithField("package", "knightmoves"),
 	}
 
+	logrus.SetLevel(logrus.InfoLevel)
 	if verbose {
 		logrus.SetLevel(logrus.DebugLevel)
 	}

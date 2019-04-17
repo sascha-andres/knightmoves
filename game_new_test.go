@@ -2,7 +2,7 @@ package knightmoves
 
 import "testing"
 
-func TestGameValid(t *testing.T) {
+func TestGameA1H8(t *testing.T) {
 	g, err := NewGame("A1", "H8", 20, true)
 
 	if err != nil {
@@ -16,7 +16,7 @@ func TestGameValid(t *testing.T) {
 	}
 
 	if g.Target.X != 7 || g.Target.Y != 7 {
-		t.Logf("expected 7-7 for initial position, got %d-%d", g.Target.X, g.Target.Y)
+		t.Logf("expected 7-7 for target position, got %d-%d", g.Target.X, g.Target.Y)
 		t.FailNow()
 	}
 }

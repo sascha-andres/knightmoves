@@ -18,44 +18,27 @@ func (game *Game) Move(depth uint, positions ...Position) error {
 	}
 
 	if positions[len(positions)-1].Equals(game.Target) {
-		if nil == game.Solution || len(game.Solution) >= len(positions) {
-			game.Solution = positions
+		err := game.SetSolution(positions)
+		if err != nil {
+			logger.Warnf("provided wrong solution: %#v", positions)
 		}
 	} else {
 		var err error
 		for _, firstLength := range moveDescription {
+			if !(len(game.Solution) == 0) && len(positions) >= len(game.Solution) {
+				continue
+			}
 			lastPosition := positions[len(positions)-1]
 			secondLength := 1
 			if firstLength == 1 {
 				secondLength = 2
 			}
-			p, e := lastPosition.Move(firstLength, secondLength)
-			if e == nil && !positionsContain(p, positions...) && err == nil {
-				err = game.Move(depth+1, append(positions, *p)...)
-			}
-			p, e = lastPosition.Move(firstLength, secondLength*-1)
-			if e == nil && !positionsContain(p, positions...) && err == nil {
-				err = game.Move(depth+1, append(positions, *p)...)
-			}
-			p, e = lastPosition.Move(firstLength*-1, secondLength)
-			if e == nil && !positionsContain(p, positions...) && err == nil {
-				err = game.Move(depth+1, append(positions, *p)...)
-			}
-			p, e = lastPosition.Move(firstLength*-1, secondLength*-1)
-			if e == nil && !positionsContain(p, positions...) && err == nil {
-				err = game.Move(depth+1, append(positions, *p)...)
-			}
+			game.makeMove(lastPosition, firstLength, secondLength, positions, err, depth)
+			game.makeMove(lastPosition, firstLength, secondLength*-1, positions, err, depth)
+			game.makeMove(lastPosition, firstLength*-1, secondLength, positions, err, depth)
+			game.makeMove(lastPosition, firstLength*-1, secondLength*-1, positions, err, depth)
 		}
 	}
 
 	return nil
-}
-
-func positionsContain(newPosition *Position, positions ...Position) bool {
-	for _, p := range positions {
-		if p.Equals(newPosition) {
-			return true
-		}
-	}
-	return false
 }

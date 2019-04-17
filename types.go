@@ -11,7 +11,6 @@ type (
 		Solution []Position
 
 		baseLogger *logrus.Entry
-		solutions  [][]Position
 	}
 
 	// Position is a position for a knight
